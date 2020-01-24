@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Dashboard from './components/Dashboard.js'
+import Display from './components/Display'
+import styled from 'styled-components'
 
 function App() {
+  const [strikes, setStrikes] = useState(0)
+  const [balls, setBalls] = useState(0)
+  
+  const Container = styled.div`
+    border: 3px solid yellow;
+    padding : 25px;
+    width: 30% ; 
+    align-content : center ;
+    margin: 5px auto 0 ;
+    background-color : gray ; 
+  `
+
+  const strike = () => {
+    if (strikes === 2) {
+      setStrikes(0)
+      setBalls(0)
+    } else {
+      setStrikes(strikes + 1)
+    }
+  }
+  const ball = () => {
+    if (balls === 3) {
+      setBalls(0)
+      setStrikes(0)
+    } else {
+      setBalls(balls + 1)
+    }
+  }
+  const foul = () => {
+    if (strikes === 2) {
+      setStrikes(2)
+    } else {
+      setStrikes(strikes + 1)
+    }
+  }
+  const hit = () => {
+    setStrikes(0)
+    setBalls(0)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className='container'>
+      <Display strikes={strikes} balls={balls}/>
+      <Dashboard  ball={ball} strike={strike} foul={foul} hit={hit}/>
+    </Container>
   );
 }
-
 export default App;
