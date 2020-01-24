@@ -4,6 +4,12 @@ import Dashboard from './components/Dashboard.js'
 import Display from './components/Display'
 import styled from 'styled-components'
 
+
+
+export const tmBsbll = timeBasbll => {
+    return timeBasbll + 37 ; 
+};
+
 function App() {
   const [strikes, setStrikes] = useState(0)
   const [balls, setBalls] = useState(0)
